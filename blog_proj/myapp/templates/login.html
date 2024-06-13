@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <style>
+        .black-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #272323;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.black-button:hover {
+    background-color: #333; /* Darken the background on hover */
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        {% load static %}
+        <img src="{% static '/img/logo.png' %}" alt="My image">
+        <ul class="links-container">
+            <li class="link-item"><a href="{% url 'home' %}" class="link">Home</a></li>
+            <li class="link-item"><a href="{% url 'about' %}" class="link">About</a></li>
+            <li class="link-item"><a href="{% url 'contact' %}" class="link">Contact Us</a></li>
+            <li class="link-item"><a href="{% url 'blog' %}" class="link">My Blogs</a></li>
+        </ul>
+    </nav>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+            {% csrf_token %}  <!-- CSRF token for security -->
+
+            <!-- Login heading -->
+            <h3>Login</h3>
+            <hr>
+
+            <!-- Display error/success messages -->
+            {% if messages %}
+            <div class="alert alert-primary" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Username input field -->
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Enter username" required>
+            </div>
+
+            <!-- Password input field -->
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+            </div>
+
+            <!-- Link to registration page -->
+            <p>Don't have an account <a href="/register/">Register</a> </p>
+
+            <!-- Submit button -->
+            <button type="submit" class="black-button">Submit</button>
+        </form>
+        <p>Not having an account? </p>
+        <a href="{% url 'register' %}" class="link">Sign in</a>
+    </div>
+</body>
+</html>

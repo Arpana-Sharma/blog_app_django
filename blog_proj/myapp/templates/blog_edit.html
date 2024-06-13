@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Post</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/new.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <style>
+        .black-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 20px 0px;
+    background-color: #272323;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.black-button:hover {
+    background-color: #333; /* Darken the background on hover */
+}
+
+    </style>
+</head>
+
+<body>
+<nav class="navbar">
+        {% load static %}
+        <img src="{% static '/img/logo.png' %}" alt="My image">
+        <ul class="links-container">
+            <li class="link-item"><a href="{% url 'home' %}" class="link">Home</a></li>
+            <li class="link-item"><a href="{% url 'about' %}" class="link">About</a></li>
+            <li class="link-item"><a href="{% url 'contact' %}" class="link">Contact Us</a></li>
+            <li class="link-item"><a href="{% url 'blog' %}" class="link">My Blogs</a></li>
+            <li class="link-item"><a href="{% url 'user_logout' %}" class="link">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Edit Post</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'blog' %}" class="black-button">Back to Posts</a>
+    </div>
+</body>
+</html>

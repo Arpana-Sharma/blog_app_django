@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/editor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <style>
+        .black-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #272323;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.black-button:hover {
+    background-color: #333; /* Darken the background on hover */
+}
+.container{
+    min-height: 100vh;
+}
+    </style>
+
+</head>
+<body>
+
+    <nav class="navbar">
+        {% load static %}
+        <img src="{% static '/img/logo.png' %}" alt="My image">
+        <ul class="links-container">
+            <li class="link-item"><a href="{% url 'home' %}" class="link">Home</a></li>
+            <li class="link-item"><a href="{% url 'about' %}" class="link">About</a></li>
+            <li class="link-item"><a href="{% url 'contact' %}" class="link">Contact Us</a></li>
+            <li class="link-item"><a href="{% url 'blog' %}" class="link">My Blogs</a></li>
+        </ul>
+    </nav>
+
+    <section class="blog">
+        <div class="container">
+            <h2 style="padding: 50px 0px;">
+                Top Blogs
+            </h2>
+            <ul>
+                 {% for post in posts %}
+            <li style="margin-bottom: 10px; padding: 10px; background-color: #f0f0f0;">
+    <a href="{% url 'blog_detail' post.pk %}" style="text-decoration: none; color: #333;">
+        {{ post.title }}
+    </a> by <span style="font-weight: bold;">{{ post.author.username }}</span>
+</li>
+
+            {% endfor %}
+            </ul>
+            <a href="{% url 'editor' %}" class="black-button">Create new post</a>
+        </div>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2024 My Company</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
+
+    <script src="{% static '/js/firebase.js' %}"></script>
+    <script src="{% static '/js/home.js' %}"></script>
+    <script src="{% static '/js/blog.js' %}"></script>
+    
+</body>
+</html>

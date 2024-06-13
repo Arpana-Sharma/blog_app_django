@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,600&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+
+</head>
+<body>
+
+    <nav class="navbar">
+        {% load static %}
+        <img src="{% static '/img/logo.png' %}" alt="My image">
+        <ul class="links-container">
+            <li class="link-item"><a href="{% url 'home' %}" class="link">Home</a></li>
+            <li class="link-item"><a href="{% url 'about' %}" class="link">About</a></li>
+            <li class="link-item"><a href="{% url 'contact' %}" class="link">Contact Us</a></li>
+            {% if user.is_authenticated %}
+            <li class="link-item"><a href="{% url 'blog' %}" class="link">My Blogs</a></li>
+            <li class="link-item"><a href="{% url 'user_logout' %}" class="link">Logout</a></li>
+        {% else %}
+            <li class="link-item"><a href="{% url 'user_login' %}" class="link">Login</a></li>
+        {% endif %}
+        </ul>
+    </nav>
+    <section class="about">
+        <div class="container">
+            <h2>Who We Are</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel ligula id ligula fermentum auctor. Quisque vel semper mauris. Aliquam erat volutpat. Ut vitae ligula nec justo malesuada ultricies. In sit amet mauris id lorem pharetra venenatis et eget justo.</p>
+            <h2>Our Mission</h2>
+            <p>Phasellus id velit arcu. Integer bibendum purus ut sem vestibulum, in tristique lorem auctor. Curabitur a odio ac dolor bibendum fermentum a nec augue. Cras nec lacus nec eros vulputate condimentum. Donec dapibus leo vel magna fermentum, vel malesuada urna gravida.</p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 My Company</p>
+    </footer>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
+
+    <script src="{% static '/js/firebase.js' %}"></script>
+    <script src="{% static '/js/home.js' %}"></script>
+
+</body>
+</html>

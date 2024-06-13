@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <style>
+        .black-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #272323;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.black-button:hover {
+    background-color: #333; /* Darken the background on hover */
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        {% load static %}
+        <img src="{% static '/img/logo.png' %}" alt="My image">
+        <ul class="links-container">
+            <li class="link-item"><a href="{% url 'home' %}" class="link">Home</a></li>
+            <li class="link-item"><a href="{% url 'about' %}" class="link">About</a></li>
+            <li class="link-item"><a href="{% url 'contact' %}" class="link">Contact Us</a></li>
+        </ul>
+    </nav>
+    <div class="login-container">
+        <h1>Create an Account</h1>
+        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+            {% csrf_token %}  <!-- CSRF token for security -->
+
+            <h3>Register</h3>
+            <hr>
+
+            <!-- Display error/success messages -->
+            {% if messages %}
+            <div class="alert alert-primary" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Username input field -->
+            <div class="form-group">
+                <label for="exampleInputName">Username</label>
+                <input type="text" class="form-control" name="username" id="exampleInputName"
+                    aria-describedby="nameHelp" placeholder="Enter name" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="email" class="form-control" name="email" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="Enter email" required>
+            </div>
+            <!-- Password input field -->
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" name="password" id="exampleInputPassword1"
+                    placeholder="Password" required>
+            </div>
+
+            <!-- Link to login page for users who already have an account -->
+            <p>Already have an account <a href="/user_login/">Login</a> </p>
+
+            <!-- Submit button -->
+            <button type="submit" class="black-button">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

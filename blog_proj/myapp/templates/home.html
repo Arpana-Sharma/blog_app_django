@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Homepage</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,600&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+</head>
+<body>
+
+    <nav class="navbar">
+        {% load static %}
+        <img src="{% static '/img/logo.png' %}" alt="My image">
+        <ul class="links-container">
+            <li class="link-item"><a href="{% url 'home' %}" class="link">Home</a></li>
+            <li class="link-item"><a href="{% url 'about' %}" class="link">About</a></li>
+            <li class="link-item"><a href="{% url 'contact' %}" class="link">Contact Us</a></li>
+            {% if user.is_authenticated %}
+            <li class="link-item"><a href="{% url 'blog' %}" class="link">My Blogs</a></li>
+            <li class="link-item"><a href="{% url 'user_logout' %}" class="link">Logout</a></li>
+        {% else %}
+            <li class="link-item"><a href="{% url 'user_login' %}" class="link">Login</a></li>
+        {% endif %}
+        </ul>
+    </nav>
+
+    <header class="header">
+        <div class="content">
+            <h1 class="heading">
+                <span class="small">welcome in the world of</span>
+                blog
+                <span class="no-fill">writing</span>
+            </h1>
+            {% if user.is_authenticated %}
+            <a href="{% url 'editor' %}" class="btn">start writing</a>
+        {% else %}
+            <a href="{% url 'user_login' %}" class="btn">start writing</a>
+        {% endif %}
+        </div>
+    </header>
+    <section class="blog">
+        <div class="container">
+            <h2 style="padding: 20px;">
+                Top Blogs
+            </h2>
+            <article class="post">
+                <h2>Blog Post Title 1</h2>
+                <img style="width: 727px;" src="{% static '/img/img1.png' %}" alt="My image">
+                <p class="date">June 7, 2024</p>
+                <p class="excerpt">This is a short excerpt from the blog post. It gives a preview of the content...</p>
+                <a href="#" class="read-more">Read More</a>
+            </article>
+            <article class="post">
+                <h2>Blog Post Title 2</h2>
+                <img style="width: 727px;" src="{% static '/img/img2.png' %}" alt="My image">
+                <p class="date">June 6, 2024</p>
+                <p class="excerpt">This is a short excerpt from another blog post. It gives a preview of the content...</p>
+                <a href="#" class="read-more">Read More</a>
+            </article>
+        </div>
+    </section>
+
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
+
+    <script src="{% static '/js/firebase.js' %}"></script>
+    <script src="{% static '/js/home.js' %}"></script>
+    
+</body>
+</html>
